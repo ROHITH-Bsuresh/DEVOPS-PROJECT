@@ -6,7 +6,6 @@ pipeline {
         TAG = "${BUILD_NUMBER}-${sh(script: 'date +%Y%m%d-%H%M%S', returnStdout: true).trim()}"
         CONTAINER_NAME = "jenkins-docker-container"
         PORT = "8080"
-        DOCKER_CREDENTIALS = credentials('993c77e9-3626-47c7-88ab-83e6764aa18b')
         NODE_ENV = 'production'
         BUILD_OUTPUT_DIR = 'build'
     }
@@ -29,7 +28,7 @@ pipeline {
         stage('Login to Docker Hub') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    withCredentials([usernamePassword(credentialsId: 960025d1-cb8c-48b2-8ccd-cf6aff341e5e, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                         sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
                     }
                 }
